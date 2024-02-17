@@ -10,17 +10,37 @@ import SwiftUI
 struct NewHabitView: View {
     
     @Environment(\.dismiss) var dismiss
+    
     var allHabits: HabitsStorage
+    
     @State private var habitTitle = ""
+    @State private var habitIcon = ""
     @FocusState private var txtFieldFocused: Bool
+    
+    let icons = HabitIcons()
+    var columns = [
+        GridItem(.adaptive(minimum: UIScreen.main.bounds.width/6))
+    ]
     
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Habit Name", text: $habitTitle)
-                    .focused($txtFieldFocused)
+                Section {
+                    TextField("Habit Name", text: $habitTitle)
+                        .focused($txtFieldFocused)
+                }
+                
+                Section("Select an icon") {
+                    LazyVGrid(columns: columns) {
+                        ForEach(icons.allIcons, id: \.self) { icon in
+                            IconsGridItemView(iconName: icon, isSelected: icon == habitIcon)
+                                .onTapGesture {
+                                    habitIcon = icon
+                                }
+                        }
+                    }
+                }
             }
-            .scrollDisabled(true)
             .scrollContentBackground(.hidden)
             .background(.mint)
             .onAppear(perform: {
@@ -30,7 +50,7 @@ struct NewHabitView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        let newHabit = HabitModel(title: habitTitle)
+                        let newHabit = HabitModel(title: habitTitle, iconName: habitIcon)
                         allHabits.savedHabits.append(newHabit)
                         dismiss()
                     }
@@ -44,8 +64,6 @@ struct NewHabitView: View {
         }
     }
 }
-
-
 
 #Preview {
     NewHabitView(allHabits: HabitsStorage())

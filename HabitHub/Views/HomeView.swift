@@ -16,7 +16,7 @@ struct HomeView: View {
         NavigationStack {
             List {
                 ForEach(allHabits.savedHabits) { habit in
-                    Text(habit.title)
+                    HabitListComponent(habit: habit)
                 }
                 .onDelete(perform: { index in
                     allHabits.savedHabits.remove(atOffsets: index)
@@ -42,8 +42,6 @@ struct HomeView: View {
         }
     }
 }
-
-
 
 #Preview {
     HomeView()
