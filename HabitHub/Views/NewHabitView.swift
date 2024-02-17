@@ -10,7 +10,7 @@ import SwiftUI
 struct NewHabitView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var allHabits: HabitsStorage
+    var allHabits: HabitsStorage
     @State private var habitTitle = ""
     @FocusState private var txtFieldFocused: Bool
     
@@ -48,5 +48,6 @@ struct NewHabitView: View {
 
 
 #Preview {
-    NewHabitView(allHabits: HabitsStorage(savedHabits: []))
+    NewHabitView(allHabits: HabitsStorage())
 }
+

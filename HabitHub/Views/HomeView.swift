@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var allHabits = HabitsStorage(savedHabits: [])
+    @State private var allHabits = HabitsStorage()
     @State private var showingSheet = false
     
     var body: some View {
