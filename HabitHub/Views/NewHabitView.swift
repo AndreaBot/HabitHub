@@ -30,10 +30,10 @@ struct NewHabitView: View {
                 Section {
                     TextField("Habit Name", text: $habitTitle)
                         .focused($txtFieldFocused)
-                }
-                
-                Section {
+                        .padding(.vertical, 8)
+
                     TextField("Description", text: $habitDescription)
+                        .padding(.vertical, 8)
                 }
                 
                 Section("Select an icon") {
