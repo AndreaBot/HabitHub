@@ -10,21 +10,28 @@ import SwiftUI
 struct NewHabitView: View {
     
     @Environment(\.dismiss) var dismiss
+    @State var allHabits: HabitsStorage
     @State private var habitTitle = ""
+    @FocusState private var txtFieldFocused: Bool
     
     var body: some View {
         NavigationStack {
             Form {
                 TextField("Habit Name", text: $habitTitle)
+                    .focused($txtFieldFocused)
             }
             .scrollDisabled(true)
             .scrollContentBackground(.hidden)
             .background(.mint)
+            .onAppear(perform: {
+                txtFieldFocused = true
+            })
             .navigationTitle("Add New Habit")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        //add habit
+                        let newHabit = HabitModel(title: habitTitle)
+                        allHabits.savedHabits.append(newHabit)
                         dismiss()
                     }
                 }
@@ -41,5 +48,5 @@ struct NewHabitView: View {
 
 
 #Preview {
-    NewHabitView()
+    NewHabitView(allHabits: HabitsStorage(savedHabits: []))
 }

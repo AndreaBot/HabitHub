@@ -9,17 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var allHabits = [HabitModel]()
+    @State private var allHabits = HabitsStorage(savedHabits: [])
     @State private var showingSheet = false
     
     var body: some View {
         NavigationStack {
-            List(allHabits) { habit in
+            List(allHabits.savedHabits) { habit in
                 Text(habit.title)
             }
             .navigationTitle("HabitHub")
             .sheet(isPresented: $showingSheet, content: {
-                NewHabitView()
+                NewHabitView(allHabits: allHabits)
             })
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
