@@ -14,8 +14,10 @@ struct NewHabitView: View {
     var allHabits: HabitsStorage
     
     @State private var habitTitle = ""
+    @State private var habitDescription = ""
     @State private var habitIcon = ""
     @State private var habitColor = ""
+    @State private var showingAlert = false
     @FocusState private var txtFieldFocused: Bool
 
     var columns = [
@@ -28,6 +30,10 @@ struct NewHabitView: View {
                 Section {
                     TextField("Habit Name", text: $habitTitle)
                         .focused($txtFieldFocused)
+                }
+                
+                Section {
+                    TextField("Description", text: $habitDescription)
                 }
                 
                 Section("Select an icon") {
@@ -61,7 +67,11 @@ struct NewHabitView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        let newHabit = HabitModel(title: habitTitle, iconName: habitIcon, color: habitColor)
+                        guard habitTitle != "" else {
+                            showingAlert = true
+                            return }
+                        
+                        let newHabit = HabitModel(title: habitTitle, description: habitDescription, iconName: habitIcon, color: habitColor)
                         allHabits.savedHabits.append(newHabit)
                         dismiss()
                     }
@@ -71,6 +81,11 @@ struct NewHabitView: View {
                         dismiss()
                     }
                 }
+            }
+            .alert("Hold on a sec...", isPresented: $showingAlert) {
+                Button("OK") {}
+            } message: {
+                Text("Give the habit a name before proceeding")
             }
         }
     }

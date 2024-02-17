@@ -28,5 +28,5 @@ struct HabitListComponent: View {
 }
 
 #Preview {
-    HabitListComponent(habit: HabitModel(id: UUID(), title: "Code", iconName: "swift", color: "red"))
+    HabitListComponent(habit: HabitModel(id: UUID(), title: "Code", description: "This is a description", iconName: "swift", color: "red"))
 }

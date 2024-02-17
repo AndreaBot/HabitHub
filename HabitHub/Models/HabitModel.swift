@@ -11,6 +11,7 @@ struct HabitModel: Identifiable, Codable {
     
     var id = UUID()
     var title: String
-    var iconName: String? 
+    var description: String
+    var iconName: String?
     var color: String
 }
