@@ -14,25 +14,36 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            List(allHabits.savedHabits) { habit in
-                Text(habit.title)
+            List {
+                ForEach(allHabits.savedHabits) { habit in
+                    Text(habit.title)
+                }
+                .onDelete(perform: { index in
+                    allHabits.savedHabits.remove(atOffsets: index)
+                })
             }
             .navigationTitle("HabitHub")
             .sheet(isPresented: $showingSheet, content: {
                 NewHabitView(allHabits: allHabits)
             })
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup() {
                     Button {
                         showingSheet = true
                     } label: {
                         Image(systemName: "plus")
+                    }
+                    if !allHabits.savedHabits.isEmpty {
+                        
+                        EditButton()
                     }
                 }
             }
         }
     }
 }
+
+
 
 #Preview {
     HomeView()
