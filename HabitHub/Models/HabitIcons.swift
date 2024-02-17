@@ -9,7 +9,7 @@ import Foundation
 
 struct HabitIcons {
     
-    let allIcons = [
+    static let allIcons = [
         "dumbbell.fill",
         "book.pages",
         "pencil.and.outline",

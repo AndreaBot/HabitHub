@@ -18,6 +18,8 @@
 		6235C7122B80DA7400C130FB /* HabitIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7112B80DA7400C130FB /* HabitIcons.swift */; };
 		6235C7142B80DC3300C130FB /* HabitListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7132B80DC3300C130FB /* HabitListComponent.swift */; };
 		6235C7162B811CCF00C130FB /* IconsGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7152B811CCF00C130FB /* IconsGridItemView.swift */; };
+		6235C7182B812C0C00C130FB /* HabitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7172B812C0C00C130FB /* HabitColors.swift */; };
+		6235C71A2B812E5900C130FB /* ColorsGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7192B812E5900C130FB /* ColorsGridItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		6235C7112B80DA7400C130FB /* HabitIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitIcons.swift; sourceTree = "<group>"; };
 		6235C7132B80DC3300C130FB /* HabitListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListComponent.swift; sourceTree = "<group>"; };
 		6235C7152B811CCF00C130FB /* IconsGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsGridItemView.swift; sourceTree = "<group>"; };
+		6235C7172B812C0C00C130FB /* HabitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitColors.swift; sourceTree = "<group>"; };
+		6235C7192B812E5900C130FB /* ColorsGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsGridItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +91,10 @@
 			children = (
 				6235C6FB2B80BF0D00C130FB /* ContentView.swift */,
 				6235C7072B80BFE200C130FB /* HomeView.swift */,
-				6235C7132B80DC3300C130FB /* HabitListComponent.swift */,
 				6235C70D2B80C21100C130FB /* NewHabitView.swift */,
+				6235C7132B80DC3300C130FB /* HabitListComponent.swift */,
 				6235C7152B811CCF00C130FB /* IconsGridItemView.swift */,
+				6235C7192B812E5900C130FB /* ColorsGridItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 			children = (
 				6235C70A2B80C02E00C130FB /* HabitModel.swift */,
 				6235C7112B80DA7400C130FB /* HabitIcons.swift */,
+				6235C7172B812C0C00C130FB /* HabitColors.swift */,
 				6235C70F2B80C8F600C130FB /* HabitsStorage.swift */,
 			);
 			path = Models;
@@ -178,8 +184,10 @@
 				6235C70B2B80C02E00C130FB /* HabitModel.swift in Sources */,
 				6235C7142B80DC3300C130FB /* HabitListComponent.swift in Sources */,
 				6235C7082B80BFE200C130FB /* HomeView.swift in Sources */,
+				6235C71A2B812E5900C130FB /* ColorsGridItemView.swift in Sources */,
 				6235C6FC2B80BF0D00C130FB /* ContentView.swift in Sources */,
 				6235C70E2B80C21100C130FB /* NewHabitView.swift in Sources */,
+				6235C7182B812C0C00C130FB /* HabitColors.swift in Sources */,
 				6235C7162B811CCF00C130FB /* IconsGridItemView.swift in Sources */,
 				6235C7102B80C8F600C130FB /* HabitsStorage.swift in Sources */,
 				6235C6FA2B80BF0D00C130FB /* HabitHubApp.swift in Sources */,
