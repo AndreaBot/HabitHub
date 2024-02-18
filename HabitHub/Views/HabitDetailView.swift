@@ -11,6 +11,7 @@ struct HabitDetailView: View {
     
     @State var habit: HabitModel
     var allHabits: HabitsStorage
+    @State private var showingSheet = false
     
     var body: some View {
         ZStack {
@@ -61,9 +62,19 @@ struct HabitDetailView: View {
                     }
                     .frame(maxWidth: .infinity)
                 }
+                
+                Section {
+                        Button("Edit Color") {
+                            showingSheet = true
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
             }
             .scrollContentBackground(.hidden)
         }
+        .sheet(isPresented: $showingSheet, content: {
+            ColorGridView(habit: $habit, allHabits: allHabits, showingSheet: $showingSheet)
+        })
     }
 }
 
