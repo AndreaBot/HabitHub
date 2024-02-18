@@ -74,6 +74,7 @@ struct HabitDetailView: View {
         }
         .sheet(isPresented: $showingSheet, content: {
             ColorGridView(habit: $habit, allHabits: allHabits, showingSheet: $showingSheet)
+                .presentationDetents([.fraction(0.4)])
         })
     }
 }
