@@ -15,7 +15,7 @@ struct NewHabitView: View {
     
     @State private var habitTitle = ""
     @State private var habitDescription = ""
-    @State private var habitIcon = ""
+    @State private var habitIcon = "circle.fill"
     @State private var habitColor = ""
     @State private var showingAlert = false
     @FocusState private var txtFieldFocused: Bool
@@ -71,7 +71,7 @@ struct NewHabitView: View {
                             showingAlert = true
                             return }
                         
-                        let newHabit = HabitModel(title: habitTitle, description: habitDescription, iconName: habitIcon, color: habitColor)
+                        let newHabit = HabitModel(title: habitTitle, description: habitDescription, iconName: habitIcon, color: habitColor, completionCount: 0)
                         allHabits.savedHabits.append(newHabit)
                         dismiss()
                     }

@@ -13,7 +13,7 @@ struct HabitListComponent: View {
     
     var body: some View {
         HStack {
-            Image(systemName: habit.iconName ?? "command")
+            Image(systemName: habit.iconName)
                 .padding(10)
                 .foregroundStyle(HabitColors.setColor(using: habit.color))
                 .background(HabitColors.setColor(using: habit.color).opacity(0.3))
@@ -28,5 +28,5 @@ struct HabitListComponent: View {
 }
 
 #Preview {
-    HabitListComponent(habit: HabitModel(id: UUID(), title: "Code", description: "This is a description", iconName: "swift", color: "red"))
+    HabitListComponent(habit: HabitModel(id: UUID(), title: "Code", description: "This is a description", iconName: "swift", color: "red", completionCount: 0))
 }

@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct HabitModel: Identifiable, Codable {
+struct HabitModel: Identifiable, Codable, Hashable, Equatable {
     
     var id = UUID()
     var title: String
     var description: String
-    var iconName: String?
+    var iconName: String
     var color: String
+    var completionCount: Int
 }

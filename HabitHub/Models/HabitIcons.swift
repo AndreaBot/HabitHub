@@ -25,7 +25,6 @@ struct HabitIcons {
         "brain.filled.head.profile",
         "music.note",
         "rainbow",
-        "dumbbell",
         "fork.knife",
         "camera.fill",
         "timelapse",

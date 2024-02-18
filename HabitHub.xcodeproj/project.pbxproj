@@ -20,6 +20,7 @@
 		6235C7162B811CCF00C130FB /* IconsGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7152B811CCF00C130FB /* IconsGridItemView.swift */; };
 		6235C7182B812C0C00C130FB /* HabitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7172B812C0C00C130FB /* HabitColors.swift */; };
 		6235C71A2B812E5900C130FB /* ColorsGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C7192B812E5900C130FB /* ColorsGridItemView.swift */; };
+		6235C71C2B82611000C130FB /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6235C71B2B82611000C130FB /* HabitDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		6235C7152B811CCF00C130FB /* IconsGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsGridItemView.swift; sourceTree = "<group>"; };
 		6235C7172B812C0C00C130FB /* HabitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitColors.swift; sourceTree = "<group>"; };
 		6235C7192B812E5900C130FB /* ColorsGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsGridItemView.swift; sourceTree = "<group>"; };
+		6235C71B2B82611000C130FB /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				6235C7132B80DC3300C130FB /* HabitListComponent.swift */,
 				6235C7152B811CCF00C130FB /* IconsGridItemView.swift */,
 				6235C7192B812E5900C130FB /* ColorsGridItemView.swift */,
+				6235C71B2B82611000C130FB /* HabitDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				6235C7122B80DA7400C130FB /* HabitIcons.swift in Sources */,
 				6235C70B2B80C02E00C130FB /* HabitModel.swift in Sources */,
+				6235C71C2B82611000C130FB /* HabitDetailView.swift in Sources */,
 				6235C7142B80DC3300C130FB /* HabitListComponent.swift in Sources */,
 				6235C7082B80BFE200C130FB /* HomeView.swift in Sources */,
 				6235C71A2B812E5900C130FB /* ColorsGridItemView.swift in Sources */,

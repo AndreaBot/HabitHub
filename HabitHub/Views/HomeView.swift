@@ -16,7 +16,10 @@ struct HomeView: View {
         NavigationStack {
             List {
                 ForEach(allHabits.savedHabits) { habit in
-                    HabitListComponent(habit: habit)
+                    NavigationLink(value: habit) {
+                        HabitListComponent(habit: habit)
+                    }
+                    
                 }
                 .onDelete(perform: { index in
                     allHabits.savedHabits.remove(atOffsets: index)
@@ -34,12 +37,15 @@ struct HomeView: View {
                         Image(systemName: "plus")
                     }
                     if !allHabits.savedHabits.isEmpty {
-                        
                         EditButton()
                     }
                 }
             }
+            .navigationDestination(for: HabitModel.self) { habit in
+                HabitDetailView(habit: habit, allHabits: allHabits)
+            }
         }
+       
     }
 }
 
