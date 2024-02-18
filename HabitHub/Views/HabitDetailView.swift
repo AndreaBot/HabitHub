@@ -12,6 +12,8 @@ struct HabitDetailView: View {
     @State var habit: HabitModel
     var allHabits: HabitsStorage
     @State private var showingSheet = false
+    @State private var showingAlert = false
+    @State private var updatedDescription = ""
     
     var body: some View {
         ZStack {
@@ -64,11 +66,24 @@ struct HabitDetailView: View {
                 }
                 
                 Section {
+                    VStack {
+                        Button("Edit Description") {
+                            showingAlert = true
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.link)
+                        
+                        Divider()
+                        
                         Button("Edit Color") {
                             showingSheet = true
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.link)
                     }
+                }
             }
             .scrollContentBackground(.hidden)
         }
@@ -76,6 +91,17 @@ struct HabitDetailView: View {
             ColorGridView(habit: $habit, allHabits: allHabits, showingSheet: $showingSheet)
                 .presentationDetents([.fraction(0.4)])
         })
+        .alert("New Description", isPresented: $showingAlert) {
+            TextField("Type your new description here", text: $updatedDescription)
+            Button("Confirm") {
+                var habitCopy = habit
+                habitCopy.description = updatedDescription
+                if let index = allHabits.savedHabits.firstIndex(of: habit) {
+                    allHabits.savedHabits[index] = habitCopy
+                    habit.description = habitCopy.description
+                }
+            }
+        }
     }
 }
 
