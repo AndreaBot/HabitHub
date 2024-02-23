@@ -6,28 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
     
-    @State private var allHabits = HabitsStorage()
+    @Environment(\.modelContext) private var modelContext
+    @Query var allHabits: [HabitModel]
+    
     @State private var showingSheet = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(allHabits.savedHabits) { habit in
+                ForEach(allHabits) { habit in
                     NavigationLink(value: habit) {
                         HabitListComponent(habit: habit)
                     }
                     
                 }
-                .onDelete(perform: { index in
-                    allHabits.savedHabits.remove(atOffsets: index)
+                .onDelete(perform: { indexSet in
+                    for index in indexSet {
+                       deleteData(allHabits[index])
+                    }
                 })
             }
             .navigationTitle("HabitHub")
             .sheet(isPresented: $showingSheet, content: {
-                NewHabitView(allHabits: allHabits)
+                NewHabitView(context: modelContext)
             })
             .toolbar {
                 ToolbarItemGroup() {
@@ -36,16 +41,20 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                    if !allHabits.savedHabits.isEmpty {
+                    if !allHabits.isEmpty {
                         EditButton()
                     }
                 }
             }
             .navigationDestination(for: HabitModel.self) { habit in
-                HabitDetailView(habit: habit, allHabits: allHabits)
+                HabitDetailView(habit: habit, context: modelContext)
             }
         }
        
+    }
+    
+    func deleteData(_ habit: HabitModel) {
+        modelContext.delete(habit)
     }
 }
 

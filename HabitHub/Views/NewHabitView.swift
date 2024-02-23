@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NewHabitView: View {
     
     @Environment(\.dismiss) var dismiss
-    
-    var allHabits: HabitsStorage
     
     @State private var habitTitle = ""
     @State private var habitDescription = ""
@@ -19,10 +18,12 @@ struct NewHabitView: View {
     @State private var habitColor = ""
     @State private var showingAlert = false
     @FocusState private var txtFieldFocused: Bool
-
+    
     var columns = [
         GridItem(.adaptive(minimum: UIScreen.main.bounds.width/6))
     ]
+    
+    var context: ModelContext?
     
     var body: some View {
         NavigationStack {
@@ -31,7 +32,7 @@ struct NewHabitView: View {
                     TextField("Habit Name", text: $habitTitle)
                         .focused($txtFieldFocused)
                         .padding(.vertical, 8)
-
+                    
                     TextField("Description", text: $habitDescription)
                         .padding(.vertical, 8)
                 }
@@ -71,8 +72,8 @@ struct NewHabitView: View {
                             showingAlert = true
                             return }
                         
-                        let newHabit = HabitModel(title: habitTitle, description: habitDescription, iconName: habitIcon, color: habitColor, completionCount: 0)
-                        allHabits.savedHabits.append(newHabit)
+                        let newHabit = HabitModel(id: UUID(), title: habitTitle, detail: habitDescription, iconName: habitIcon, color: habitColor, completionCount: 0)
+                        context!.insert(newHabit)
                         dismiss()
                     }
                 }
@@ -92,6 +93,6 @@ struct NewHabitView: View {
 }
 
 #Preview {
-    NewHabitView(allHabits: HabitsStorage())
+    NewHabitView()
 }
 

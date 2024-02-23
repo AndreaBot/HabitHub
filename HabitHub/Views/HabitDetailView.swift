@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HabitDetailView: View {
     
     @State var habit: HabitModel
-    var allHabits: HabitsStorage
+    var context: ModelContext
+    
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var updatedDescription = ""
@@ -18,6 +20,7 @@ struct HabitDetailView: View {
     var body: some View {
         ZStack {
             Color(HabitColors.setColor(using: habit.color)).opacity(0.3)
+            
                 .ignoresSafeArea()
             
             Form {
@@ -39,30 +42,33 @@ struct HabitDetailView: View {
                                 }
                         }
                         
-                        Text(habit.description)
+                        Text(habit.detail)
                     }
                     .frame(maxWidth: .infinity)
                 }
                 
                 Section {
                     VStack {
-                        Text("Completion Count")
-                        Text(String(habit.completionCount))
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                
-                Section {
-                    Button("Add") {
-                        var habitCopy = habit
-                        habitCopy.completionCount += 1
-                        
-                        if let index = allHabits.savedHabits.firstIndex(of: habit) {
-                            allHabits.savedHabits[index] = habitCopy
-                            habit.completionCount = habitCopy.completionCount
+                        VStack {
+                            Text("Completion Count")
+                            Text(String(habit.completionCount))
+                                .padding(.top, 5)
                         }
+                        .frame(maxWidth: .infinity)
+                        
+                        Divider()
+                        
+                        Button("Log Completion") {
+                            habit.completionCount += 1
+                            do {
+                                try context.save()
+                            } catch {
+                                print("There was an error updating the habit: \(error.localizedDescription)")
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
                     }
-                    .frame(maxWidth: .infinity)
                 }
                 
                 Section {
@@ -85,28 +91,34 @@ struct HabitDetailView: View {
                     }
                 }
             }
-            .scrollContentBackground(.hidden)
+            
         }
+        .scrollContentBackground(.hidden)
         .sheet(isPresented: $showingSheet, content: {
-            ColorGridView(habit: $habit, allHabits: allHabits, showingSheet: $showingSheet)
+            ColorGridView(habit: $habit, showingSheet: $showingSheet, context: context)
                 .presentationDetents([.fraction(0.4)])
+            
         })
         .alert("New Description", isPresented: $showingAlert) {
             TextField("Type your new description here", text: $updatedDescription)
             Button("Confirm") {
-                var habitCopy = habit
-                habitCopy.description = updatedDescription
-                if let index = allHabits.savedHabits.firstIndex(of: habit) {
-                    allHabits.savedHabits[index] = habitCopy
-                    habit.description = habitCopy.description
+                habit.detail = updatedDescription
+                do {
+                    try context.save()
+                } catch {
+                    print(error.localizedDescription)
                 }
             }
         }
     }
 }
 
+
 #Preview {
-    HabitDetailView(habit: HabitModel(title: "Reduce Screen Time", description: "I will play tennis three time per week", iconName: "tennisball.fill", color: "yellow", completionCount: 0), allHabits: HabitsStorage())
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: HabitModel.self, configurations: config)
+    
+    return HabitDetailView(habit: HabitModel(id: UUID(), title: "a", detail: "", iconName: "swift", color: "green", completionCount: 6), context: ModelContext(container))
 }
 
 

@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ColorGridView: View {
     
     var columns = [
         GridItem(.adaptive(minimum: UIScreen.main.bounds.width/6))
     ]
-    @Binding var habit: HabitModel
-    var allHabits: HabitsStorage
     
+    @Binding var habit: HabitModel
     @Binding var showingSheet: Bool
+    
+    var context: ModelContext
+    @Query var allHabits: [HabitModel]
     
     
     var body: some View {
@@ -23,20 +26,23 @@ struct ColorGridView: View {
             ForEach(HabitColors.allColors, id: \.self) { color in
                 ColorsGridItemView(iconColor: color, isSelected: color == habit.color)
                     .onTapGesture {
-                        var habitCopy = habit
-                        habitCopy.color = color
-                        if let index = allHabits.savedHabits.firstIndex(of: habit) {
-                            allHabits.savedHabits[index] = habitCopy
-                            habit.color = habitCopy.color
-                            showingSheet = false
+                        habit.color = color
+                        do {
+                            try context.save()
+                        } catch {
+                            print(error.localizedDescription)
                         }
-                        
+                        showingSheet = false
                     }
             }
         }
     }
 }
 
+
 #Preview {
-    ColorGridView(habit: .constant(HabitModel(title: "", description: "", iconName: "", color: "", completionCount: 0)), allHabits: HabitsStorage(), showingSheet: .constant(true))
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: HabitModel.self, configurations: config)
+    
+    return ColorGridView(habit: .constant(HabitModel(id: UUID(), title: "", detail: "", iconName: "", color: "", completionCount: 0)), showingSheet: .constant(true), context: ModelContext(container))
 }

@@ -19,7 +19,6 @@ struct ColorsGridItemView: View {
                 Circle()
                     .stroke(.mint, lineWidth: isSelected ? 5 : 0)
             }
-    
     }
 }
 
